@@ -2,27 +2,54 @@
 <html>
 <head>
 <title>Special Gift</title>
+
 <style>
 body {
   text-align: center;
-  font-family: Arial;
-  background-color: #ffe6f0;
-  padding-top: 100px;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  padding-top: 80px;
+  color: white;
 }
+
 button {
   padding: 15px 25px;
   font-size: 18px;
   border: none;
   background-color: #ff4d6d;
   color: white;
-  border-radius: 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
 }
-#gift {
+
+button:hover {
+  transform: scale(1.1);
+}
+
+#gift, #countdown {
   display: none;
   margin-top: 20px;
 }
+
+#count {
+  font-size: 50px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.pulse {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
 </style>
 </head>
+
 <body>
 
 <h1>Welcome ❤️</h1>
@@ -30,10 +57,15 @@ button {
 <button onclick="showGift()">A Special Gift For You</button>
 
 <div id="gift">
-  <h2>Hug Me 🤗</h2>
-  <img src="https://media.giphy.com/media/od5H3PmEG5EVq/giphy.gif" width="250">
+  <h2>Distance can’t stop this hug… 🤗</h2>
+  <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" width="250">
   <br><br>
-  <button onclick="startCall()">Hug Me</button>
+  <button class="pulse" onclick="startCountdown()">Hug Me</button>
+</div>
+
+<div id="countdown">
+  <h2>Get Ready…</h2>
+  <div id="count">3</div>
 </div>
 
 <script>
@@ -41,8 +73,22 @@ function showGift() {
   document.getElementById("gift").style.display = "block";
 }
 
-function startCall() {
-  window.location.href = "meet.google.com/rxx-cfem-yas";
+function startCountdown() {
+  document.getElementById("gift").style.display = "none";
+  document.getElementById("countdown").style.display = "block";
+
+  let count = 3;
+  document.getElementById("count").innerText = count;
+
+  let counter = setInterval(function() {
+    count--;
+    document.getElementById("count").innerText = count;
+
+    if (count === 0) {
+      clearInterval(counter);
+      window.open("https://meet.google.com/juc-mmnq-qvo", "_blank");
+    }
+  }, 1000);
 }
 </script>
 
